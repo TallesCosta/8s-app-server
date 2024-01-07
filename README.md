@@ -15,5 +15,8 @@ A aplicação local exemplifica o uso de containers e k8s.
 `docker network create k8s-example-network-app` - cria network para comunicação entre client e server.
 `docker network connect k8s-example-network-app k8s-example-container-server` - adiciona container client à network criada.
 
+# Execução via Docker Compose
+`docker-compose up --build -d` - cria todos os containers, networks, volumes, etc. da app client.
+
 # Teste API
 http://localhost:3000/api - Status Code: 200 - "app published!"

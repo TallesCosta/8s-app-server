@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  app-server:
+    container_name: k8s-app-server-container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - k8s-app-network
+    restart: always
+
+networks:
+  # network apenas para client e server
+  k8s-app-network:
+    name: k8s-app-network
+    # default network type.
+    driver: bridge
