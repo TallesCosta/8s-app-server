@@ -9,10 +9,28 @@ services:
     ports:
       - "3000:3000"
     networks:
+      - k8s-app-server-network
       - k8s-app-network
+    depends_on:
+      - db-redis
+    environment:
+      - REDIS_URL=redis://db-redis:6379
+    restart: always
+
+  db-redis:
+    container_name: k8s-db-redis-container
+    image: redis:7.2.3-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - k8s-app-server-network
     restart: always
 
 networks:
+  # network apenas para server e banco de dados
+  k8s-app-server-network:
+    name: k8s-app-server-network
+    driver: bridge
   # network apenas para client e server
   k8s-app-network:
     name: k8s-app-network
