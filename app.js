@@ -31,6 +31,11 @@ app.get('/api/visitas', async (req, res) => {
     res.status(200).json({visitas: visitas});
 });
 
+app.get('/api/reset', async (req, res) => {
+    await db.set('visitas', 0);
+    res.status(200).send();
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
